@@ -1,0 +1,74 @@
+﻿@using MyEvernote.Entities
+@using MyEvernote.WebApp.Models
+
+@model  List<Comment>
+@{
+    EvernoteUser user = CurrentSession.User;
+}
+
+@if (Model.Any())
+{
+    foreach (var comment in Model)
+    {
+        <div class="media">
+            <div class="media-body">
+                <div class="row">
+                    <div class="col-lg-1">
+                        <span class="fa fa-comment"></span>
+                    </div>
+                    <div class="col-lg-8">
+                        <div id="comment_text_@comment.Id" data-edit-mode="false" contenteditable="false">
+                            @comment.Text
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        @if (user != null && user.Id == comment.Owner.Id)
+                    {
+                            <span class="pull-right">
+                                <button type="button" class="btn btn-warning btn-sm" onclick="doComment(this, 'edit_clicked', @comment.Id, '#comment_text_@comment.Id');">
+                                    <span class="fa fa-edit"></span>
+                                </button>
+                                <button type="button" class="btn btn-danger btn-sm" onclick="doComment(this, 'delete_clicked', @comment.Id);">
+                                    <span class="fa fa-trash"></span>
+                                </button>
+                            </span>
+                        }
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 text-right">
+                        <small>
+                            <span class="fa fa-calendar-times-o"></span> @comment.ModifiedOn &nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="fa fa-user"></span> @comment.Owner.Username
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="alert alert-info" role="alert">
+        <strong>Üzgünüz.</strong> Henüz hiç yorum yapılmamış.
+    </div>
+}
+
+@if (user != null)
+{
+    <hr />
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="input-group">
+                <input type="text" id="new_comment-text" class="form-control" placeholder="Yorumunuz...">
+                <span class="input-group-btn">
+                    <button class="btn btn-success" type="button" onclick="doComment(this, 'new_clicked', -1)">
+                        <i class="fa fa-send"></i>
+                        Gönder
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+}

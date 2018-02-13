@@ -1,0 +1,46 @@
+﻿@model MyEvernote.WebApp.ViewModels.OkViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 offset-3">
+            <div class="card card-register mx-auto mt-5">
+                <div class="card-header bg-success text-light">@Model.Header</div>
+                <div class="card-body">
+                    <div class="alert alert-success">
+                        <h2><i class="fa fa-check"></i> @Model.Title</h2>
+                        <hr />
+                        <p>
+                            @if (Model != null)
+                            {
+                                foreach (var message in Model.Items)
+                                {
+                                    @message<br />
+                                }
+                            }
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{
+    string js = string.Empty;
+
+    if (Model.IsRedirecting)
+    {
+        js = "setTimeout(function () { window.location = '" + Model.RedirectingUrl + "'; }, " + Model.RedirectingTimeout + ");";
+    }
+}
+
+<script>
+    $(function () {
+        @Html.Raw(js)
+    });
+</script>

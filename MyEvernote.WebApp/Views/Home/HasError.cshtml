@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Hata Oluştu";
+}
+
+@{
+    Exception ex = null;
+    if (TempData["LastError"] != null)
+    {
+        ex = TempData["LastError"] as Exception;
+    }
+}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 offset-2 my-4">
+            <div class="alert alert-danger">
+                <h2>
+                    <span class="fa fa-info"></span> Hata
+                </h2>
+                <p>
+                    Hata oluştu, lütfen site yöneticisi ile iletişime geçiniz.
+                    <br />
+                    @if (ex != null)
+                    {
+                        <strong>Hata Detay: </strong>
+                        @ex.Message
+                    }
+                    <br />
+                    <br />
+                    <a href="@Url.Action("Index", "Home")" class="btn btn-info">Anasayfaya git...</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

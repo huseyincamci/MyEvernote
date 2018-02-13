@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Hakkında";
+}
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+            @*<h4 class="my-4">Kategoriler</h4>*@
+            @Html.Partial("_PartialCategories")
+        </div>
+        <!-- /.col-lg-3 -->
+        <div class="col-lg-9">
+            <div class="row my-4">
+                <!-- About -->
+                <h2>
+                    Bu site örnek proje olarak hazırlanmıştır.
+                </h2>
+                <!-- /.row -->
+            </div>
+            <!-- /.col-lg-9 -->
+        </div>
+        <!-- /.row -->
+    </div>
+</div>
+
+
+@section footer {
+    @Html.Partial("_Footer")
+}

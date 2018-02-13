@@ -1,0 +1,86 @@
+﻿@model MyEvernote.Entities.EvernoteUser
+
+@{
+    ViewBag.Title = "Düzenle";
+}
+
+<link href="~/Content/Validation.css" rel="stylesheet" />
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 my-4">
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <h4>@ViewBag.Title</h4>
+                    <hr />
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-3 col-form-label" })
+                        <div class="col-9">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.Surname, htmlAttributes: new { @class = "col-3 col-form-label" })
+                        <div class="col-9">
+                            @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "col-3 col-form-label" })
+                        <div class="col-9">
+                            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-3 col-form-label" })
+                        <div class="col-9">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "col-3 col-form-label" })
+                        <div class="col-9">
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "col-3 col-form-label" })
+                        <div class="col-9">
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.IsActive)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.IsAdmin, htmlAttributes: new { @class = "col-3 col-form-label" })
+                        <div class="col-9">
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.IsAdmin)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="offset-3 col-9">
+                            <button type="submit" class="btn btn-warning">
+                                <span class="fa fa-edit"></span>
+                                Düzenle
+                            </button>
+                            @Html.ActionLink("İptal", "Index", "EvernoteUser", null, new { @class = "btn btn-secondary" })
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
